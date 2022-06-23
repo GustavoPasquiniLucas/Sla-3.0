@@ -1,11 +1,14 @@
 const servidor = require('./config/servidor')
 const app = servidor.app
 const porta = servidor.porta
-//importar a rota index.js
-const index = require('./routes/index')(app)
 
-const consigne = require('consign')
-consigne().include('./routes').into(app)
+//importar a rota index.js (sem usar o consign)
+//const index = require('./routes/index')(app)
 
-app.listen(porta)
- 
+//impotar o consign e conigurar
+const consign = require('consign')
+consign().include('./routes').into(app)
+
+app.listen(porta,()=>{
+    console.log("http://localhost:"+porta)
+})
